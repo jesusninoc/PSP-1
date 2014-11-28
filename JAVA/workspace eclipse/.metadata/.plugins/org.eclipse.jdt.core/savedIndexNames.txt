@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+/home/mati/workspace eclipse/.metadata/.plugins/org.eclipse.jdt.core
+2232283176.index
+3126349659.index
+2555899711.index
+2119245623.index

@@ -1,0 +1,15 @@
+
+public class RepasoHilos1 extends Thread {
+	
+	private Thread h1;
+	private int incremento1; 
+	private int incremento2; 
+	int contador1;
+	int contador2;
+	
+	public RepasoHilos1(int incremento1,int incremento2,int contador1,int contador2){
+		incremento1 = 1;
+		incremento2 = 2;
+	}
+
+}

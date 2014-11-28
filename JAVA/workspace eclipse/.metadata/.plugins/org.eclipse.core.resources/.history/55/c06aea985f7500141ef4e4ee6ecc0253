@@ -1,0 +1,101 @@
+
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+
+
+public class pelota extends Applet implements Runnable, ActionListener {
+
+	//Propiedades
+	private Thread h1;
+	private Font fuente;
+	long CONTADOR=1;
+	private boolean parar;
+	private Button b1; //botones del Applet
+	
+	
+	
+	public void start(){
+		if (h1!=null && h1.isAlive()){ //si el hilo está corriendo y vivo no hago nada
+				}
+		else
+		{
+			h1=new Thread(this);
+			h1.start();
+		}
+		
+	}	
+	
+	
+	
+	
+	//método init
+	public void init(){
+		setBackground(Color.yellow);//color de fondo
+		
+		//añado botón 1 y su listener
+		add(b1=new Button("Parar contador 1"));
+		b1.addActionListener(this);
+		
+		fuente=new Font("Verdana",Font.BOLD,26); //tipo de letra
+		
+		run();
+	}
+	
+
+	public void run() {
+		//inicializo parar a falso
+		parar=false;
+		
+		//recojo hiloActual
+		Thread hiloActual=Thread.currentThread();
+		
+		while (h1==hiloActual){
+			try{
+				Thread.sleep(1000);
+			}catch (InterruptedException e){e.printStackTrace();}
+			repaint();
+			if(h1!=null){
+				CONTADOR++;
+			}
+		}//fin while
+		
+	}//fin run
+	
+	
+	public void paint(Graphics g){
+		g.setFont(fuente);
+		g.drawString(Long.toString((long)CONTADOR), 60, 100);//escribe contador
+		
+		 int ancho = Integer.parseInt(this.getParameter("WIDTH")); 
+		 int alto = Integer.parseInt(this.getParameter("HEIGHT")); 
+		 
+		 FillArc(int x, int y, int width, int height, int startAngle, int arcAngle); 
+		
+	}
+	
+	
+	//parar controlar pulsación botones	
+	public void actionPerformed(ActionEvent e) {
+		b1.setLabel("Parar hilo 1");
+		
+		if (e.getSource()==b1){//comienzo
+			h1=null;
+		}
+		
+		
+	}//actionperformed
+	
+	public void stop(){
+		
+		h1=null;
+	}
+
+	
+	
+
+
+
+
+
+}

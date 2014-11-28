@@ -1,0 +1,13 @@
+
+public class RepasoHilos1 {
+	
+	private Thread h1;
+	private int incremento = 1; 
+	long contador1;
+	long contador2;
+	
+	public RepasoHilos1(Thread hilo,int incremento){
+		
+	}
+
+}
