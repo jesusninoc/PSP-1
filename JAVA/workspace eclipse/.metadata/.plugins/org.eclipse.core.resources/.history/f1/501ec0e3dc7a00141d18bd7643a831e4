@@ -1,0 +1,10 @@
+
+public class HiloMain {
+	
+	public static void main(String args[]){
+		RepasoHilos2 rH1 = new RepasoHilos2(1,2,1,1);
+		RepasoHilos2 rH2 = new RepasoHilos2(1,2,1,1);
+		RepasoHilos2 rH3 = new RepasoHilos2(1,2,1,1);
+	}
+	
+}

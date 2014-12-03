@@ -1,0 +1,32 @@
+import java.applet.Applet;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class AppletMain extends Applet implements Runnable, ActionListener{
+
+	public void start(){
+		if (h1!=null && h2!=null && h2.isAlive() && h1.isAlive()){ //si el hilo está corriendo y vivo no hago nada
+				}
+		else
+		{
+			h1=new Thread(this);
+			h1.start();
+			h2=new Thread(this);
+			h2.start();
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

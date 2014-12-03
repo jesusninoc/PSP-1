@@ -1,0 +1,32 @@
+
+public class RpasoHilos2Applet {
+	private int incremento1; 
+	private int incremento2; 
+	int contador1;
+	int contador2;
+	
+	public RpasoHilos2Applet(int incremento1,int incremento2,int contador1,int contador2){
+		this.incremento1 = incremento1;
+		this.incremento2 = incremento2;
+		this.contador1 = contador1;
+		this.contador2 = contador2;
+		
+	}
+	
+	public void run(){
+		//Thread hiloActual=Thread.currentThread();
+		while(true){
+			this.contador1 += this.incremento1;
+			this.contador2 += this.incremento2;
+			try{
+				Thread.sleep(1000);
+			}catch (InterruptedException e){e.printStackTrace();}
+			//MostrarValores();
+		}
+	}
+	
+	public void MostrarValores(){
+		System.out.println(this.contador1);
+		System.out.println(this.contador2);
+	}
+}

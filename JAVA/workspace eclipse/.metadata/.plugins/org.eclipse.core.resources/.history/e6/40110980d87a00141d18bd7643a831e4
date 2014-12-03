@@ -1,0 +1,12 @@
+
+public class RepasoPrincipal {
+	
+	public void Repaso(){
+		RepasoHilos1 rH1 = new RepasoHilos1(1,2,1,1);
+		rH1.start();
+		while(true){
+			rH1.MostrarValores();
+		}
+	}
+
+}
