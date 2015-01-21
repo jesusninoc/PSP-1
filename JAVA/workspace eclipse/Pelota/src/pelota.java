@@ -11,11 +11,15 @@ public class pelota extends Applet implements Runnable, ActionListener {
 	private Font fuente;
 	long CONTADOR=1;
 	private boolean parar;
-	private Button b1; //botones del Applet
+	private Button b1,b2; //botones del Applet
 	private int x= 60;
 	private int y= 150;
 	//int ancho = Integer.parseInt(this.getParameter("WIDTH"));
 	boolean izquierda = false;
+	
+	
+	
+	private volatile boolean stopRequested = false; //volatile pueden acceder a ella varios hilos
 	
 	
 	public void start(){
@@ -37,8 +41,11 @@ public class pelota extends Applet implements Runnable, ActionListener {
 		setBackground(Color.yellow);//color de fondo
 		
 		//añado botón 1 y su listener
-		add(b1=new Button("Parar pelota"));
+		add(b1=new Button("Parar pelota(flag)"));
 		b1.addActionListener(this);
+		
+		add(b2=new Button("Parar pelota(interrupt)"));
+		b2.addActionListener(this);
 		
 		fuente=new Font("Verdana",Font.BOLD,26); //tipo de letra
 		
@@ -54,12 +61,13 @@ public class pelota extends Applet implements Runnable, ActionListener {
 		//recojo hiloActual
 		Thread hiloActual=Thread.currentThread();
 		
-		while (h1==hiloActual){
+		while (h1==hiloActual && !stopRequested){
 			try{
+				repaint();
 				Thread.sleep(300);
-			}catch (InterruptedException e){e.printStackTrace();}
-			repaint();
-			if(h1!=null){
+			}catch (InterruptedException e){System.out.println("Se ha interrumpido la ejecucion");}
+		
+			if(h1!=null ){
 				if(!izquierda){
 					x+=20;
 				}else{
@@ -97,14 +105,29 @@ public class pelota extends Applet implements Runnable, ActionListener {
 	
 	//parar controlar pulsación botones	
 	public void actionPerformed(ActionEvent e) {
-		b1.setLabel("Parar pelota");
+		//b1.setLabel("Parar pelota");
 		
 		if (e.getSource()==b1){//comienzo
-			h1=null;
+			stopRequested=true;
+		}else if(e.getSource()==b2){
+			interrumpir();
 		}
+		/*if (e.getSource()==b2){//comienzo
+			requestStop();
+		}*/
+		
+		
 		
 		
 	}//actionperformed
+	
+	/*public void requestStop() {
+		  stopRequested = true;
+	}*/
+	
+	public void interrumpir(){
+		h1.interrupt();
+	}
 	
 	public void stop(){
 		

@@ -1,0 +1,37 @@
+
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+class Cliente {
+	static final String HOST = "localhost";
+	static final int PUERTO=5000;
+	String entradaTeclado = "";
+	public Cliente( ) {
+		try{
+			Socket skCliente = new Socket(HOST, PUERTO);
+			System.out.println("Conexión al servidor.Pulse 0 para salir" );
+			System.out.println("Conectado" );
+			InputStream aux = skCliente.getInputStream();
+			OutputStream aux2 = skCliente.getOutputStream();
+
+			DataInputStream flujo = new DataInputStream( aux );
+			DataOutputStream flujo2= new DataOutputStream( aux2 );
+
+			Scanner entradaEscaner = new Scanner (System.in);
+			do{
+				
+				entradaTeclado = entradaEscaner.nextLine ();
+				flujo2.writeUTF( entradaTeclado);
+				System.out.println("Servidor: "+ flujo.readUTF() );
+			}while(!entradaTeclado.equals("0"));
+			skCliente.close();
+		}catch(Exception e) {
+			System.out.println( e.getMessage() );
+		}
+	}
+	
+	public static void main(String[] arg) {
+		new Cliente();
+	}
+}
